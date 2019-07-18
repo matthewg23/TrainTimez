@@ -7,6 +7,7 @@
     messagingSenderId: "477307186015",
     appId: "1:477307186015:web:847b3c0b886ca72c"
   };
+  
 firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
@@ -21,12 +22,12 @@ $("#add").on("click", function () {
   var rate = $('#rate').val().trim();
 
   // First Time (pushed back 1 year to make sure it comes before current time)
-    var firstTrainTime = moment(firstTrain, "hh:mm").subtract(1, "years");
+    var firstTrainTime = moment(firstTrain, "HH:mm").subtract(1, "years");
     console.log(firstTrainTime);
 
     // Current Time
     var timenow = moment();
-    console.log("CURRENT TIME: " + moment(timenow).format("hh:mm"));
+    console.log("CURRENT TIME: " + moment(timenow).format("HH:mm"));
 
     // Difference between the times
     var timedifferece = moment().diff(moment(firstTrainTime), "minutes");
@@ -41,8 +42,8 @@ $("#add").on("click", function () {
     console.log("MINUTES TILL TRAIN: " + minsAway);
 
     // Next Train
-    var nextTrain = moment().add(minsAway, "minutes");
-    console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+    var nextTrain = moment().add(minsAway, "minutes").format("HH:mm");
+    console.log("ARRIVAL TIME: " + nextTrain);
 
   database.ref().push({
     train: trainName,
@@ -57,7 +58,7 @@ var labelText = {
   "train": "Train Name",
   "destination": "Destination",
   "rate": "Frequency",
-  "firstTrain": "Next Train",
+  "firsttrain": "Next Train",
   "away": "Mins Away",
 };
 
